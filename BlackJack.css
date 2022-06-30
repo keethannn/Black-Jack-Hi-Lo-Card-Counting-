@@ -1,0 +1,150 @@
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-image: url("./greenfelt.png");
+}
+
+#dealer-cards img
+{
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+    border-radius: 5px;
+    color: white;
+}
+
+#your-cards img
+{
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+    border-radius: 5px;
+    color: white;
+}
+
+#your-cards2 img
+{
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+    border-radius: 5px;
+    color: white;
+}
+
+.text 
+{
+    color: white;
+    text-shadow: 3px 3px black;
+}
+
+.hit 
+{
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: rgb(0, 128, 0);
+    transition-duration: 0.3s;
+    background-color: white;
+    color: green;
+    cursor: pointer;
+}
+
+.hit:hover
+{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.stand
+{
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: rgb(255, 0, 0);
+    transition-duration: 0.3s;
+    background-color: white;
+    color: red;
+    cursor: pointer;
+}
+
+.stand:hover 
+{
+    background-color: #f44336;
+    color: white;
+}
+
+#split
+{
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color:rgb(239, 206, 60);
+    transition-duration: 0.3s;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+#split:hover 
+{
+    background-color: rgb(239, 206, 60);
+    color: white;
+}
+
+#nextroundbutton
+{
+    height: 50px;
+    width: 150px;
+    font-size: 20px;
+    border-color: rgb(177, 177, 177);
+    border-style: solid;
+    border-radius: 5px;
+    background-color: #2e582f;
+    color: white;
+    cursor: pointer;
+    border-width: 1px;
+}
+
+#hint
+{
+    height: 50px;
+    width: 100px;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+    transition-duration: 0.4s;
+    background-color: rgb(212, 140, 71);
+    color: white;
+    cursor: pointer;
+}
+
+#hint:hover
+{
+    background-color: white;
+    color: rgb(212, 140, 71);
+    text-shadow: 0.5px 0.5px black;
+}
+
+#reload
+{
+    height: 50px;
+    width: 100px;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+    transition-duration: 0.4s;
+    background-color: rgb(181, 35, 35);
+    color: white;
+    cursor: pointer;
+}
+
+#reload:hover
+{
+    background-color: rgb(255, 115, 115);
+    color: white;
+    text-shadow: 0.5px 0.5px black;
+}

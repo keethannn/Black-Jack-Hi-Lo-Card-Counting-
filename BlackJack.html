@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Black Jack Card Counter</title>
+        <link rel="stylesheet" href="BlackJack.css">
+        <script src="BlackJack.js"></script>  
+    </head>
+    <body>
+        <h1 class="text">Black Jack Card Counting Trainer</h1>
+        <h4 class="text">Running Count: <span id="running-count"></span></h4>
+        <h3 class="text">Remaining Card Count: <span id="card-count"></span></h3>
+        <h2 class="text">Dealer: <span id="dealer-sum"></span></h2>
+        <div id="dealer-cards">
+        </div>
+
+        <div id="hand1">
+            <h2 class="text">You: <span id="your-sum"></span></h2>
+            <div id="your-cards"></div>
+            <button id="hit1" class="hit">Hit</button>
+            <button id="stand1" class="stand">Stand</button>
+            <h2 id="results1" class="text"></h2>
+        </div>
+        <div id="hand2">
+            <h2 class="text">You2: <span id="your-sum2"></span></h2>
+            <div id="your-cards2"></div>
+            <button id="hit2" class="hit">Hit</button>
+            <button id="stand2" class="stand">Stand</button>
+            <h2 id="results2" class="text"></h2>
+        </div>
+        
+        <div id="gameover">
+            <br>
+            <button id="hit" class="hit">Hit</button>
+            <button id="stand" class="stand">Stand</button>
+            <button id="split">Split</button>
+            <br>
+            <br>
+        </div>
+
+        <div id="nextround">
+            <h2 id="results" class="text"></h2>
+            <button id="nextroundbutton">Next Round</button>
+            <br>
+            <br>
+        </div>
+
+        <h2 class="text" id="hint-text"><span id="move-hint"></span></h2>
+        <button id = "reload" onClick="window.location.reload();">New Game</button>
+        <button id="hint">Hint</button>
+    </body>
+</html>
