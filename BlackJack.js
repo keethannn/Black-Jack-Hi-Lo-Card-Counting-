@@ -14,6 +14,7 @@ var hidden;
 var deck;
 var canSplit = true;
 
+//prepares shuffled deck and starts game
 window.onload = function()
 {
     buildDeck();
@@ -21,6 +22,7 @@ window.onload = function()
     startGame();
 }
 
+//creates 8 decks
 function buildDeck() 
 {
     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
@@ -40,18 +42,19 @@ function buildDeck()
     }
 }
 
+// shuffles deck
 function shuffleDeck()
 {
     for (let i = 0; i < deck.length; i++)
     {
-        let j = Math.floor(Math.random() * deck.length);
+        let j = Math.floor(Math.random() * deck.length); // finds random number between 1 and deck length to switch
         let temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
     }
 }
 
-function startGame()
+function startGame() // creates layout for when game starts
 {
     dealerSum = 0;
     yourSum = 0;
@@ -110,6 +113,8 @@ function startGame()
     hiddenCardImg.id = "hidden";
     document.getElementById("dealer-cards").append(hiddenCardImg);
     
+    //drawing cards for dealer
+    
     hidden = drawCard();
     dealerSum += getValue(hidden);
     dealerAceCount += checkAce(hidden);
@@ -122,6 +127,8 @@ function startGame()
     dealerUpcard = dealerCard;
     runningCountValue(dealerCard);
     document.getElementById("dealer-cards").append(dealerCardImg);
+    
+    //drawing cards for player
     
     for (let i = 0; i < 2; i++)
     {   
@@ -144,6 +151,8 @@ function startGame()
 
     reduceAce(0);
     reduceAce(1);
+    
+    // dealer automatically draws if you start with blackjack
 
     if (yourSum == 21)
     {
@@ -177,11 +186,13 @@ function hit()
     reduceAce(1);
     document.getElementById("hint-text").style.display = "none";
     
+    // automatically lose if you bust
     if (yourSum > 21)
     {
         showResults("You Lose!");
     }
 
+    // check if dealer has blackjack if you get blackjack
     else if (yourSum == 21)
     {
         dealerDraw();
@@ -202,10 +213,13 @@ function stand()
     document.getElementById("hint-text").style.display = "none";
     reduceAce(1);
 
+    // let dealer draw if you decid to stand
+    
     dealerDraw();
     
     let message = "";
 
+    // you win if dealer busts
     if (dealerSum > 21)
     {
         message = "You Win!";
@@ -214,10 +228,12 @@ function stand()
     {
         message = "It's a Tie!";
     }
+    // you lose if you have lower amount than dealer
     else if (dealerSum > yourSum)
     {
         message = "You Lose!";
     }
+    // you win if you have more than dealer
     else if (dealerSum < yourSum)
     {
         message = "You Win!";
@@ -228,6 +244,7 @@ function stand()
 
 function split()
 {
+    // changing layout for two hands instead of one when splitting
     document.getElementById("hand1").style.display = "block";
     document.getElementById("hand2").style.display = "block";  
     document.getElementById("hand1").style.float = "left";
@@ -253,6 +270,7 @@ function split()
     let yourCards = document.getElementById("your-cards");
     document.getElementById("your-cards2").append(yourCards.lastChild);
     
+    // in the condition that you have two aces and you split them, they both become 11 again
     if (yourSum == 12 && yourAceCount == 1)
     {
         yourSum = 11;
@@ -291,12 +309,14 @@ function split()
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("your-sum2").innerText = yourSum2;
 
+    // if your first hand gets blackjack, then move over to the second turn for your other hand
     if (yourSum == 21)
     {
         showResults1("Black Jack!");
         stand1();
     }
-
+    
+    // if second hand is blackjack, then immediately show second hand as blackjack
     if (yourSum2 == 21)
     {
         document.getElementById("results2").innerText = "Black Jack!";
@@ -308,6 +328,8 @@ function split()
     document.getElementById("hit2").addEventListener("click", hit2);
     document.getElementById("stand2").addEventListener("click", stand2);
 }
+
+// function to hit for first hand
 
 function hit1()
 {
@@ -332,6 +354,8 @@ function hit1()
         stand1();
     }
 }
+
+// function to stand for second hand
 
 function stand1()
 {
@@ -381,6 +405,8 @@ function stand1()
         document.getElementById("stand2").style.visibility = "visible";
     }
 }
+
+// function to hit for second hand
 
 function hit2()
 {
@@ -466,6 +492,8 @@ function hit2()
     }
 }
 
+// function to stand on second hand
+
 function stand2()
 {
     reduceAce(2);
@@ -519,6 +547,7 @@ function stand2()
     }
 }
 
+// if hand has an ace and is over 21, drop the ace from 11 to 1
 function reduceAce(player) 
 {
     if (player == 0)
@@ -550,6 +579,7 @@ function reduceAce(player)
     }
 }
 
+// function to get value of card from its name
 function getValue(card)
 {
     let value = (card.split("-"))[0];
@@ -574,6 +604,7 @@ function checkAce(card)
     return 0;
 }
 
+// UI display at the end of the round so that user can move on to the next one
 function showResults(message)
 {
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";
@@ -591,6 +622,7 @@ function showResults(message)
     document.getElementById("hint").style.display = "none";
 }
 
+// show results of left hand
 function showResults1(message)
 {
     document.getElementById("your-sum").innerText = yourSum;
@@ -598,6 +630,7 @@ function showResults1(message)
     document.getElementById("results1").style.display = "block";
 }
 
+// show results of right hand
 function showResults2(message)
 {
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";
@@ -616,6 +649,7 @@ function showResults2(message)
     document.getElementById("hint").style.display = "none";
 }
 
+// called whenever user is done or got blackjack, and need to compare with dealer's cards
 function dealerDraw()
 {
     reduceAce(0);
@@ -634,6 +668,7 @@ function dealerDraw()
     document.getElementById("hint-text").style.display = "block";
 }
 
+// keep track of running count for card counters
 function runningCountValue(card)
 {
     let value = (card.split("-"))[0];
@@ -651,6 +686,11 @@ function runningCountValue(card)
 
 function basicStrategy()
 {
+    // strategies are graphs representing different pairs of cards, x-axis 
+    // represents value of first card and y-axis represents value of second cards
+    // this information is then passed onto the interactive hint button
+    
+    // hard is for when you have no ace
     hardStrategy = [[1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
@@ -661,7 +701,8 @@ function basicStrategy()
                     [0,0,0,0,0,1,1,1,1,1],
                     [0,0,0,0,0,1,1,1,1,1],
                     [0,0,0,0,0,0,0,0,0,0]]
-
+    
+    // soft is for when you have no ace
     softStrategy = [[1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
@@ -669,7 +710,8 @@ function basicStrategy()
                     [1,1,1,1,1,1,1,1,1,1],
                     [0,0,0,0,0,0,0,1,1,1],
                     [0,0,0,0,0,0,0,0,0,0]]
-
+    
+    // for when your cards are equal
     splitStrategy = [[1,1,2,2,2,2,1,1,1,1],
                      [1,1,2,2,2,2,1,1,1,1],
                      [1,1,1,1,1,1,1,1,1,1],
@@ -749,6 +791,7 @@ function basicStrategy()
 
 function basicStrategy1()
 {
+    // basic strategy for first hand if you split
     hardStrategy = [[1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
@@ -829,6 +872,7 @@ function basicStrategy1()
 
 function basicStrategy2()
 {
+    // basic strategy for second hand if you split
     hardStrategy = [[1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1],
@@ -908,6 +952,7 @@ function basicStrategy2()
     document.getElementById("hint-text").style.display = "block";
 }
 
+// adding an additional card to the UI
 function drawCard()
 {
     document.getElementById("card-count").innerText = deck.length - 1;
